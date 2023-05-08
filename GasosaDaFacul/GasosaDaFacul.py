@@ -1,4 +1,5 @@
 # import matplotlib as plt
+import Crypt
 import Database
 
 def main():
@@ -26,6 +27,7 @@ def Login():
     keyword = "CANCELAR"
     s = "Login cancelado\n\n"
     print(f"\nCaso queria cancelar a operacao, digite {keyword} em qualquer momento durante o login")
+
     user = input("Escreva seu usuario: ")
     
     if user == keyword:
@@ -38,31 +40,59 @@ def Login():
         print(s)
         return -1
 
-    # Checar no banco de dados o login
-    return 0
+    if Database.DB.Login(user, pas) > 0:
+        print("Sucesso")
+    else:
+        print("Login desconhecido ou errado")
+
+    return -1 
 
 def Registro():
     keyword = "CANCELAR"
     s = "Login cancelado\n\n"
-    print(f"\nCaso queria cancelar a operacao, digite {keyword} em qualquer momento durante o login")
+    print(f"\nCaso queria cancelar a operacao, digite {keyword} em qualquer momento durante o registro")
+    pas, pasConf, t = "", "0", 0
 
-    pas = input("Escreva sua senha: ")
+
+    while pas != pasConf:
+        if t > 0:
+            print("\n\nSenha diferente, tente novamente\n\n")
+        user = input("Escreva seu usuario: ")
     
-    if pas == keyword:
-        print(s)
-        return -1
+        if user == keyword:
+            print(s)
+            return -1
 
-    pasConf = input("Confirme sua senha: ")
+        pas = input("Escreva sua senha: ")
+    
+        if pas == keyword:
+            print(s)
+            return -1
 
-    if pasConf == keyword:
-        print(s)
-        return -1
+        pasConf = input("Confirme sua senha: ")
 
-    if pas != pasConf:
-        print("Login cancelado, senha diferente\n\n")
-        return -1
+        if pasConf == keyword:
+            print(s)
+            return -1
+        t += 1
 
-    # salvar no banco de dados o register
+   
+    tipo = ""
+    t = 0
+
+    while not (tipo in ["1", "2"]):
+        if t > 0:
+            print("Escolha invalida, tente novamente")
+        tipo = input("Voce quer ser motorista ou pedir carona: \n1- Pedir carona\n2- Ser motorista\nEscolha: ")
+        t += 1
+
+    user = Crypt.Crypt.Encrypt(user)
+    pas = Crypt.Crypt.Encrypt(pas)
+    tipo = int(tipo)
+
+    Database.DB.Register(user, pas, tipo)
+
+    print("Sucesso")
     return 0
 
 
