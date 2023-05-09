@@ -28,14 +28,26 @@ class DB:
     def Register(user, pas, tipo):
         global conn
 
-        sql = f" INSERT INTO GASOSAFACUL.TBLOGIN (USUARIO, SENHA, TIPO) VALUES ('{user}', '{pas}', {tipo}) "
+        sql = f" INSERT INTO GASOSAFACUL.TBLOGIN (USUARIO, SENHA, TIPO) VALUES ('{str(user)}', '{str(pas)}', {int(tipo)}) "
 
         c = conn.cursor()
 
         c.execute(sql)
         conn.commit()
 
+    @staticmethod
+    def GetType(user):
+        global conn
 
+        sql = f" SELECT L.TIPO FROM GASOSAFACUL.TBLOGIN L WHERE L.USUARIO = '{user}' "
 
-if __name__ == "__main__":
-    DB()
+        c = conn.cursor()
+
+        c.execute(sql)
+        r = c.fetchall()
+
+        for row in r:
+            t = int(row[0])
+
+        return t
+

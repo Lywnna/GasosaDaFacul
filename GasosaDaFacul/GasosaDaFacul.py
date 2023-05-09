@@ -1,14 +1,15 @@
 # import matplotlib as plt
-import Crypt
 import Database
+import Motorista
 
 def main():
-    x = PromptPrincipal()
-    if x == 1:
-        while Login() < 0:
-            PromptPrincipal()
-    else:
-        Registro()
+    while True:
+        x = PromptPrincipal()
+        if x == 1:
+            while Login() < 0:
+                PromptPrincipal()
+        else:
+            Registro()
 
 
 def PromptPrincipal():
@@ -40,8 +41,12 @@ def Login():
         print(s)
         return -1
 
-    if Database.DB.Login(user, pas) > 0:
-        print("Sucesso")
+    if Database.DB.Login(user, pas) == 1:
+        if Database.DB.GetType(user) == 2:
+            Motorista.main()
+        else:
+            print("carona")
+        exit(0)
     else:
         print("Login desconhecido ou errado")
 
@@ -86,13 +91,13 @@ def Registro():
         tipo = input("Voce quer ser motorista ou pedir carona: \n1- Pedir carona\n2- Ser motorista\nEscolha: ")
         t += 1
 
-    user = Crypt.Crypt.Encrypt(user)
-    pas = Crypt.Crypt.Encrypt(pas)
+    user  = str(user.strip())
+    pas = str(pas.strip())
     tipo = int(tipo)
 
     Database.DB.Register(user, pas, tipo)
 
-    print("Sucesso")
+    print("Cadastrado com sucesso\n\n")
     return 0
 
 

@@ -22,8 +22,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Database.py" />
-    <Compile Include="Crypt.py" />
     <Compile Include="GasosaDaFacul.py" />
+    <Compile Include="Motorista.py" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
