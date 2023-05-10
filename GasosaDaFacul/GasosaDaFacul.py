@@ -1,4 +1,3 @@
-# import matplotlib as plt
 import Database
 import Motorista
 
