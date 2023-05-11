@@ -1,3 +1,4 @@
+from struct import pack
 import mysql.connector 
 
 conn = mysql.connector.connect(
@@ -50,4 +51,29 @@ class DB:
             t = int(row[0])
 
         return t
+    @staticmethod
+    def GetIDPlayer(user):
+        global conn
+        sql = f" SELECT L.ID FROM GASOSAFACUL.TBLOGIN L WHERE L.USUARIO = '{user}' "
 
+        c = conn.cursor()
+
+        c.execute(sql)
+
+        r = c.fetchall()
+
+        for row in r:
+            t = int(row[0])
+
+        return t
+
+    @staticmethod
+    def SaveOffer(id_player, preco, localidades, dias):
+        global conn
+
+        sql = f" INSERT INTO GASOSAFACUL.TBMOTORISTA (ID_PESSOA, PRECO, LOCALIDADE, DIAS) VALUES ({id_player}, {preco}, '{localidades}', '{dias}')  "
+
+        c = conn.cursor()
+
+        c.execute(sql)
+        conn.commit()

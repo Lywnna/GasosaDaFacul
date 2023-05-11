@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 import Database
 import Motorista
 
@@ -42,7 +43,7 @@ def Login():
 
     if Database.DB.Login(user, pas) == 1:
         if Database.DB.GetType(user) == 2:
-            Motorista.main()
+            Motorista.Motorista.main(Database.DB.GetIDPlayer(user))
         else:
             print("carona")
         exit(0)
