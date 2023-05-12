@@ -1,5 +1,5 @@
 import calendar as cal
-from datetime import datetime 
+from datetime import datetime
 import Database
 
 class Motorista():
@@ -17,18 +17,7 @@ class Motorista():
             e = input("Escolha: ")
 
             if e == "1":
-                print("\n")
-                print("=-="*20)
-                preco = input("Escreva seu preco: ")
-                local = input("Escreva os locais que atende: ")
-                now = datetime.now()
-                print(f"\nHorario atual: {now}")
-                print(cal.month(now.year, now.month))
-
-                print("Escolha os dias que pode dar carona separados por virgula")
-                dias = input("Dias: ")
-                Database.DB.SaveOffer(id_player, preco, local, dias)
-                
+                Motorista.CreateOffer(id_player)  
                 print("Sucesso!")
 
             elif e == "2":
@@ -39,6 +28,22 @@ class Motorista():
                 print()
 
             e = ""
+
+    def CreateOffer(idp):
+        id_player = idp
+
+        print("\n")
+        print("=-="*20)
+        preco = input("Escreva seu preco: ")
+        local = input("Escreva os locais que atende: ")
+        now = datetime.now()
+        print(f"\nHorario atual: {now}")
+        print(cal.month(now.year, now.month))
+        
+        print("Escolha os dias que pode dar carona separados por virgula")
+        dias = input("Dias: ")
+        Database.DB.SaveOffer(id_player, preco, local, dias)
+                
 
 
 

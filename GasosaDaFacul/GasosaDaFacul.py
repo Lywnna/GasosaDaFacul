@@ -1,6 +1,6 @@
-from dataclasses import dataclass
 import Database
 import Motorista
+import Carona
 
 def main():
     while True:
@@ -45,7 +45,7 @@ def Login():
         if Database.DB.GetType(user) == 2:
             Motorista.Motorista.main(Database.DB.GetIDPlayer(user))
         else:
-            print("carona")
+            Carona.Carona.main(Database.DB.GetIDPlayer(user))
         exit(0)
     else:
         print("Login desconhecido ou errado")

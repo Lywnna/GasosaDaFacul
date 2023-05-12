@@ -1,4 +1,3 @@
-from struct import pack
 import mysql.connector 
 
 conn = mysql.connector.connect(

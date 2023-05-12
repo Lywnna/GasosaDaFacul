@@ -21,6 +21,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Carona.py" />
     <Compile Include="Database.py" />
     <Compile Include="GasosaDaFacul.py" />
     <Compile Include="Motorista.py" />
