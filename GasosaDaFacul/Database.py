@@ -76,3 +76,60 @@ class DB:
 
         c.execute(sql)
         conn.commit()
+
+
+    @staticmethod
+    def SeeOffers():
+        global conn 
+        sql = """
+            SELECT
+            M.ID,
+            L.USUARIO,
+            M.PRECO,
+            M.LOCALIDADE,
+            M.DIAS
+            FROM gasosafacul.tbmotorista M
+            JOIN gasosafacul.tblogin L ON L.ID = M.ID_PESSOA
+        """
+        c = conn.cursor()
+
+        c.execute(sql)
+        r = c.fetchall()
+
+        index = ["Identificador: ","Motorista: ", "Preco: ", "Localidade: ", "Dias: "]
+        for row in r:
+            i = 0
+            print("=-=" * 20)
+            for x in row:
+                print(f"{index[i]}{x}")
+                i += 1
+        print("=-=" * 20)
+
+        sql = "SELECT M.ID FROM gasosafacul.tbmotorista M"
+        
+        c = conn.cursor()
+
+        c.execute(sql)
+        r = c.fetchall()
+
+        t = []
+        for row in r:
+            for i in row:
+                t.append(i)
+
+        return t
+
+    @staticmethod
+    def SaveContract(id_carona, id_motorista):
+        global conn
+
+        sql = f"INSERT INTO GASOSAFACUL.TBCONTRATO (ID_MOTORISTA, ID_CARONA) VALUES ({id_motorista}, {id_carona})"
+        
+        c = conn.cursor()
+        c.execute(sql)
+        conn.commit()
+
+
+
+
+                

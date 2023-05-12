@@ -16,28 +16,35 @@ class Carona():
             e = input("Escolha: ")
             
             if e == "1":
-                print("Sucesso!")
+                Carona.ChooseOffers(id_player)
             elif e == "2":
                 print()
             elif e == "3":
                 print()
             elif e == "4":
                 print()
-
+            
+            print("\n")
             e = ""
 
-    def SeeOffers():
+    def ChooseOffers(id_player):
         print("\n")
         print("Ofertas")
-        sql = """
-            SELECT
-            L.USUARIO,
-            M.PRECO,
-            M.LOCALIDADE,
-            M.DIAS
-            FROM gasosafacul.tbmotorista M
-            JOIN gasosafacul.tblogin L ON L.ID = M.ID_PESSOA
-        """
+        IDs = Database.DB.SeeOffers()
+        x = ""
+        i = 0
+        while not(x in IDs):
+            if i > 0:
+                print("Escolha invalida, tente novamente")
+            try:
+                x = int(input("\n\nUse o numero identificador para escolher\nEscolha uma das ofertas: "))
+            except:
+                print("Algo alem de numero foi escrito, tente novamente")
+            i += 1
+        
+        Database.DB.SaveContract(id_player, x)
+
+        print("Parabens voce esta mais pobre")
 
 
 
