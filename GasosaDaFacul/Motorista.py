@@ -50,6 +50,3 @@ class Motorista():
 
 if __name__ == "__main__":
     Motorista.main()
-
-
-

@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 import Database
 
 
@@ -30,6 +31,7 @@ class Carona():
     def ChooseOffers(id_player):
         print("\n")
         print("Ofertas")
+        print("Para sair digite 0")
         IDs = Database.DB.SeeOffers()
         x = ""
         i = 0
@@ -37,7 +39,11 @@ class Carona():
             if i > 0:
                 print("Escolha invalida, tente novamente")
             try:
-                x = int(input("\n\nUse o numero identificador para escolher\nEscolha uma das ofertas: "))
+                x = input("\n\nUse o numero identificador para escolher\nEscolha uma das ofertas: ")
+                if x == "0":
+                    print("\n")
+                    return
+                x = int(x)
             except:
                 print("Algo alem de numero foi escrito, tente novamente")
             i += 1
@@ -47,10 +53,10 @@ class Carona():
         print("Parabens voce contratou o sevico")
 
     def CheckOffer(id_player):
-        print("Oferta ativa")
+        print("Ofertas ativas")
         offers = Database.DB.CheckActiveContracts(id_player)
 
-        index = ["ID: ", "Usuario: ", "Localidade: ", "Preco: ", "Dias: "]
+        index = ["Identificador: ", "Usuario: ", "Localidade: ", "Preco: ", "Dias: "]
         for tup in offers:
             i = 0
             print("=-=" * 20)
@@ -58,18 +64,27 @@ class Carona():
                 print(f"{index[i]}{ele}")
                 i += 1
 
-        input("pause")
+        print("\n\nDigite o numero do identificador para deletar, ou 0 para sair")
+        x = ""
+        i = 0
+        t = Database.DB.GetOfferID(id_player)
+        while not(x in t):
+            if i > 0:
+                print("Escolha invalida, tente novamente")
+            try:
+                x = input("Escolha: ")
+                if x == "0":
+                    print("\n")
+                    return
+                x = int(x)
+            except:
+                print("Algo alem de numero foi escrito, tente novamente")
 
+            i += 1
 
+        Database.DB.DeleteActiveOffer(x)
 
-
-
-
-
-
-
-
-
+        print("Deletado com sucesso")
 
 
 if __name__ == "__main__":

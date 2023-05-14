@@ -158,5 +158,35 @@ class DB:
         
         
         return t
+    
+    @staticmethod
+    def GetOfferID(idp):
+        global conn
 
-                
+        sql = f"SELECT C.ID FROM gasosafacul.tbcontrato C WHERE C.ID_CARONA = {idp}"
+        
+        c = conn.cursor()
+
+        c.execute(sql)
+
+        r = c.fetchall()
+
+        t = []
+
+        for row in r:
+            for i in row:
+                t.append(i)
+            
+        return t
+
+    @staticmethod
+    def DeleteActiveOffer(id):
+        global conn
+
+        sql = f"DELETE FROM gasosafacul.tbcontrato C WHERE C.ID = {id}"
+
+        c = conn.cursor()
+
+        c.execute(sql)
+
+        conn.commit()
