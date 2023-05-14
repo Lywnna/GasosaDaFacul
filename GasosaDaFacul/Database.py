@@ -129,7 +129,34 @@ class DB:
         c.execute(sql)
         conn.commit()
 
+    @staticmethod
+    def CheckActiveContracts(idp):
+        global conn
 
+        sql = f"""
+            SELECT
+            C.ID,
+            L.USUARIO,
+            M.LOCALIDADE,
+            M.PRECO,
+            M.DIAS
+            FROM gasosafacul.tbcontrato C
+            JOIN gasosafacul.tbmotorista M ON M.ID = C.ID_MOTORISTA 
+            JOIN gasosafacul.tblogin L ON L.ID = M.ID_PESSOA
+            WHERE C.ID_CARONA = {idp}
+        """
 
+        c = conn.cursor()
+
+        c.execute(sql)
+        r = c.fetchall()
+
+        t = []
+
+        for row in r:
+            t.append(row)
+        
+        
+        return t
 
                 

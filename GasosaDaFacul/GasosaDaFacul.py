@@ -5,9 +5,9 @@ import Carona
 def main():
     while True:
         x = PromptPrincipal()
+
         if x == 1:
-            while Login() < 0:
-                PromptPrincipal()
+            Login()
         else:
             Registro()
 
@@ -19,7 +19,7 @@ def PromptPrincipal():
         print("2- Cadastrar-se")
         opcao = input("Escolha: ")
 
-        if not(opcao in ["1", "2"]):
+        if not(opcao.strip() in ["1", "2"]):
             print("Escolha invalida \nTeste novamente usando os numeros disponiveis")
         else:
             return int(opcao)
@@ -41,16 +41,18 @@ def Login():
         print(s)
         return -1
 
-    if Database.DB.Login(user, pas) == 1:
-        if Database.DB.GetType(user) == 2:
-            Motorista.Motorista.main(Database.DB.GetIDPlayer(user))
-        else:
-            Carona.Carona.main(Database.DB.GetIDPlayer(user))
+    if Database.DB.Login(user, pas) != 1:
+        print("Login desconhecido ou errado")
+        return -1
+
+    if Database.DB.GetType(user) == 2:
+        Motorista.Motorista.main(Database.DB.GetIDPlayer(user))
         exit(0)
     else:
-        print("Login desconhecido ou errado")
+        Carona.Carona.main(Database.DB.GetIDPlayer(user))
+        exit(0)
 
-    return -1 
+
 
 def Registro():
     keyword = "CANCELAR"

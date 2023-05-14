@@ -9,7 +9,7 @@ class Carona():
             print("=-=" * 20)
             print("Menu principal")
             print("1 - Ver ofertas de carona")
-            print("2 - Ver clientes")
+            print("2 - Ver ofertas ativas")
             print("3 - Exportar relatorios")
             print("4 - Exportar graficos")
             print("5 - Sair")
@@ -18,7 +18,7 @@ class Carona():
             if e == "1":
                 Carona.ChooseOffers(id_player)
             elif e == "2":
-                print()
+                Carona.CheckOffer(id_player)
             elif e == "3":
                 print()
             elif e == "4":
@@ -44,7 +44,29 @@ class Carona():
         
         Database.DB.SaveContract(id_player, x)
 
-        print("Parabens voce esta mais pobre")
+        print("Parabens voce contratou o sevico")
+
+    def CheckOffer(id_player):
+        print("Oferta ativa")
+        offers = Database.DB.CheckActiveContracts(id_player)
+
+        index = ["ID: ", "Usuario: ", "Localidade: ", "Preco: ", "Dias: "]
+        for tup in offers:
+            i = 0
+            print("=-=" * 20)
+            for ele in tup:
+                print(f"{index[i]}{ele}")
+                i += 1
+
+        input("pause")
+
+
+
+
+
+
+
+
 
 
 
