@@ -1,6 +1,7 @@
 import Database
 import Motorista
 import Carona
+import Utils
 
 def main():
     while True:
@@ -56,7 +57,7 @@ def Login():
 
 def Registro():
     keyword = "CANCELAR"
-    s = "Login cancelado\n\n"
+    s = "Registro cancelado\n\n"
     print(f"\nCaso queria cancelar a operacao, digite {keyword} em qualquer momento durante o registro")
     pas, pasConf, t = "", "0", 0
 
@@ -68,19 +69,19 @@ def Registro():
     
         if user == keyword:
             print(s)
-            return -1
+            return 
 
         pas = input("Escreva sua senha: ")
     
         if pas == keyword:
             print(s)
-            return -1
+            return
 
         pasConf = input("Confirme sua senha: ")
 
         if pasConf == keyword:
             print(s)
-            return -1
+            return 
         t += 1
 
    
@@ -100,7 +101,8 @@ def Registro():
     Database.DB.Register(user, pas, tipo)
 
     print("Cadastrado com sucesso\n\n")
-    return 0
+
+    Utils.Util.Separator()
 
 
 

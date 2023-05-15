@@ -1,4 +1,5 @@
 import mysql.connector 
+import Utils
 
 conn = mysql.connector.connect(
     user="root",
@@ -16,7 +17,6 @@ class DB:
 
         c = conn.cursor()
         c.execute(sql)
-
         r = c.fetchall()
 
         for row in r:
@@ -31,7 +31,6 @@ class DB:
         sql = f" INSERT INTO GASOSAFACUL.TBLOGIN (USUARIO, SENHA, TIPO) VALUES ('{str(user)}', '{str(pas)}', {int(tipo)}) "
 
         c = conn.cursor()
-
         c.execute(sql)
         conn.commit()
 
@@ -42,7 +41,6 @@ class DB:
         sql = f" SELECT L.TIPO FROM GASOSAFACUL.TBLOGIN L WHERE L.USUARIO = '{user}' "
 
         c = conn.cursor()
-
         c.execute(sql)
         r = c.fetchall()
 
@@ -56,9 +54,7 @@ class DB:
         sql = f" SELECT L.ID FROM GASOSAFACUL.TBLOGIN L WHERE L.USUARIO = '{user}' "
 
         c = conn.cursor()
-
         c.execute(sql)
-
         r = c.fetchall()
 
         for row in r:
@@ -73,7 +69,6 @@ class DB:
         sql = f" INSERT INTO GASOSAFACUL.TBMOTORISTA (ID_PESSOA, PRECO, LOCALIDADE, DIAS) VALUES ({id_player}, {preco}, '{localidades}', '{dias}')  "
 
         c = conn.cursor()
-
         c.execute(sql)
         conn.commit()
 
@@ -92,23 +87,22 @@ class DB:
             JOIN gasosafacul.tblogin L ON L.ID = M.ID_PESSOA
         """
         c = conn.cursor()
-
         c.execute(sql)
         r = c.fetchall()
 
         index = ["Identificador: ","Motorista: ", "Preco: ", "Localidade: ", "Dias: "]
         for row in r:
             i = 0
-            print("=-=" * 20)
+            Utils.Util.Separator()
             for x in row:
                 print(f"{index[i]}{x}")
                 i += 1
-        print("=-=" * 20)
+
+        Utils.Util.Separator()
 
         sql = "SELECT M.ID FROM gasosafacul.tbmotorista M"
         
         c = conn.cursor()
-
         c.execute(sql)
         r = c.fetchall()
 
@@ -147,15 +141,12 @@ class DB:
         """
 
         c = conn.cursor()
-
         c.execute(sql)
         r = c.fetchall()
 
         t = []
-
         for row in r:
             t.append(row)
-        
         
         return t
     
@@ -166,13 +157,10 @@ class DB:
         sql = f"SELECT C.ID FROM gasosafacul.tbcontrato C WHERE C.ID_CARONA = {idp}"
         
         c = conn.cursor()
-
         c.execute(sql)
-
         r = c.fetchall()
 
         t = []
-
         for row in r:
             for i in row:
                 t.append(i)
@@ -186,7 +174,31 @@ class DB:
         sql = f"DELETE FROM gasosafacul.tbcontrato C WHERE C.ID = {id}"
 
         c = conn.cursor()
-
         c.execute(sql)
-
         conn.commit()
+
+
+    @staticmethod
+    def CheckClients(id):
+        global conn
+        
+        sql = f"""
+            SELECT
+            L.USUARIO,
+            M.LOCALIDADE,
+            M.DIAS
+            FROM gasosafacul.tbcontrato C
+            JOIN gasosafacul.tbmotorista M ON M.ID = C.ID_MOTORISTA 
+            JOIN gasosafacul.tblogin L ON L.ID = C.ID_CARONA
+            WHERE M.ID_PESSOA = {id}
+        """
+
+        c = conn.cursor()
+        c.execute(sql)
+        r = c.fetchall()
+
+        t = []
+        for row in r:
+            t.append(row)
+
+        return t
