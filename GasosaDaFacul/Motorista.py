@@ -9,7 +9,7 @@ class Motorista():
         id_motorista = idp
         while not(e in ["1", "2", "3", "4"]):
             Utils.Util.Separator()
-            print("Menu principal")
+            print("Menu principal do motorista")
             print("1 - Criar oferta de carona")
             print("2 - Ver clientes")
             print("3 - Exportar relatorios")

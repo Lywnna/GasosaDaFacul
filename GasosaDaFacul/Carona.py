@@ -8,7 +8,7 @@ class Carona():
         e = ""
         while not(e in ["1", "2", "3", "4"]):
             Utils.Util.Separator()
-            print("Menu principal")
+            print("Menu principal do carona")
             print("1 - Ver ofertas de carona")
             print("2 - Ver ofertas ativas")
             print("3 - Exportar relatorios")
@@ -25,7 +25,7 @@ class Carona():
             elif e == "3":
                 print()
             elif e == "4":
-                print()
+                Carona.ExportGraph(id_player)
             else:
                 exit(0)
             
@@ -89,7 +89,9 @@ class Carona():
         Database.DB.DeleteActiveOffer(x)
 
         print("Deletado com sucesso")
-
+    
+    def ExportGraph(idp):
+        Utils.Util.Graph(x,y,"Meses", "Gasto", "Gastos mensais")
 
 if __name__ == "__main__":
     Carona.main()
