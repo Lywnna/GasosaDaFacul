@@ -30,6 +30,7 @@ class Motorista():
             else:
                 exit(0)
 
+            Utils.Util.Clear()
             e = ""
 
     def CreateOffer(idp):

@@ -202,3 +202,29 @@ class DB:
             t.append(row)
 
         return t
+
+    @staticmethod
+    def GetSpent(idp):
+        global conn
+
+        sql = f"""
+            SELECT
+            M.MES,
+            SUM(M.PRECO) AS PRECO
+            FROM gasosafacul.tbcontrato C
+            JOIN gasosafacul.tbmotorista M ON M.ID = C.ID_MOTORISTA
+            WHERE C.ID_CARONA = {idp}
+            GROUP BY 1
+        """
+
+        c = conn.cursor()
+        c.execute(sql)
+        r = c.fetchall()
+
+        t = []
+
+        for row in r:
+            t.append(row)
+
+        return t
+

@@ -12,6 +12,8 @@ def main():
         else:
             Registro()
 
+        Utils.Util.Clear()
+
 
 def PromptPrincipal():
     while True:
@@ -45,6 +47,8 @@ def Login():
     if Database.DB.Login(user, pas) != 1:
         print("Login desconhecido ou errado")
         return -1
+
+    Utils.Util.Clear()
 
     if Database.DB.GetType(user) == 2:
         Motorista.Motorista.main(Database.DB.GetIDPlayer(user))

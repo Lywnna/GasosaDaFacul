@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import os
 
 class Util():
     @staticmethod
@@ -15,4 +16,6 @@ class Util():
         plt.title(title)
         plt.show()
 
-
+    @staticmethod
+    def Clear():
+        os.system("cls")

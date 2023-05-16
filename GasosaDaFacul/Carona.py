@@ -29,7 +29,7 @@ class Carona():
             else:
                 exit(0)
             
-            print("\n")
+            Utils.Util.Clear()
             e = ""
 
     def ChooseOffers(id_player):
@@ -91,7 +91,15 @@ class Carona():
         print("Deletado com sucesso")
     
     def ExportGraph(idp):
-        Utils.Util.Graph(x,y,"Meses", "Gasto", "Gastos mensais")
+        
+        t = Database.DB.GetSpent(idp)
+        x = []
+        y = []
+        for tup in t:
+            x.append(tup[0]) 
+            y.append(tup[1]) 
+
+        Utils.Util.Graph(x, y,"Meses", "Gasto", "Gastos mensais")
 
 if __name__ == "__main__":
     Carona.main()
