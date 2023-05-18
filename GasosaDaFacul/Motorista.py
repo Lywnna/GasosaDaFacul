@@ -1,14 +1,16 @@
 import calendar as cal
 from datetime import datetime
+from email import utils
 import Database
 import Utils
 
 class Motorista():
     def main(idp):
+        Utils.Util.Clear()
         e = ""
         id_motorista = idp
         while not(e in ["1", "2", "3", "4"]):
-            Utils.Util.Separator()
+            Utils.Util.Separator(False)
             print("Menu principal do motorista")
             print("1 - Criar oferta de carona")
             print("2 - Ver clientes")
@@ -17,16 +19,17 @@ class Motorista():
             print("5 - Sair")
             e = input("Escolha: ")
 
-            Utils.Util.Separator()
+            Utils.Util.Separator(False)
 
             if e == "1":
                 Motorista.CreateOffer(id_motorista)  
             elif e == "2":
                 Motorista.CheckClients(id_motorista)
             elif e == "3":
-                print()
+                Motorista.CreateReport(id_motorista)
+                input("Relatorio exportado com sucesso")
             elif e == "4":
-                print()
+                Motorista.ExportGraph(id_motorista)
             else:
                 exit(0)
 
@@ -55,16 +58,41 @@ class Motorista():
         index = ["Usuario: ", "Localidade: ", "Dias: "]
         x = 0
         for client in t:
-            x += 0
-            Utils.Util.Separator()
+            x = 0
+            Utils.Util.Separator(False)
             for i in client: 
                 print(f"{index[x]}{i}")
                 x += 1
 
-        Utils.Util.Separator()
-                
+        Utils.Util.Separator(False)
+    
+    def ExportGraph(idp):
 
+        t = Database.DB.GetWealth(idp)
 
+        x = []
+        y = []
+        for tup in t:
+            x.append(tup[0])
+            y.append(tup[1])
+
+        Utils.Util.Graph(x, y, "Meses", "Ganhos", "Ganhos mensais")
+
+    def CreateReport(idp):
+        
+        t = Database.DB.GetWealth(idp)
+        
+        s = ""
+        index = ["Mes: ", "Ganhos:"]
+        for tup in t:
+            x = 0
+            s += Utils.Util.Separator(True)
+            for i in tup:
+                s += f"{index[x]}{i}\n"
+                x += 1
+
+        with open("relatorio.txt", "w") as f:
+            f.write(s)
 
 
 if __name__ == "__main__":

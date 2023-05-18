@@ -7,7 +7,7 @@ class Carona():
         id_player = idp
         e = ""
         while not(e in ["1", "2", "3", "4"]):
-            Utils.Util.Separator()
+            Utils.Util.Separator(False)
             print("Menu principal do carona")
             print("1 - Ver ofertas de carona")
             print("2 - Ver ofertas ativas")
@@ -16,7 +16,7 @@ class Carona():
             print("5 - Sair")
             e = input("Escolha: ")
             
-            Utils.Util.Separator()
+            Utils.Util.Separator(False)
 
             if e == "1":
                 Carona.ChooseOffers(id_player)
@@ -61,12 +61,12 @@ class Carona():
         index = ["Identificador: ", "Usuario: ", "Localidade: ", "Preco: ", "Dias: "]
         for tup in offers:
             i = 0
-            Utils.Util.Separator()
+            Utils.Util.Separator(False)
             for ele in tup:
                 print(f"{index[i]}{ele}")
                 i += 1
 
-        Utils.Util.Separator()
+        Utils.Util.Separator(False)
 
         print("Digite o numero do identificador para deletar, ou 0 para sair")
         x = ""
@@ -100,6 +100,23 @@ class Carona():
             y.append(tup[1]) 
 
         Utils.Util.Graph(x, y,"Meses", "Gasto", "Gastos mensais")
+
+    def ExportReport():
+        
+        t = Database.DB.GetSpent(idp)
+
+        s = ""
+        index = ["Mes: ", "Ganhos: "]
+        for tup in t:
+            x = 0
+            s +=  Utils.Util.Separator(True)
+            for i in tup:
+                s += f"{index[x]}{i}\n"
+                x += 1
+
+        with open("relatorio.txt", "w") as f:
+            f.write(s)
+
 
 if __name__ == "__main__":
     Carona.main()

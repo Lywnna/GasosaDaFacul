@@ -93,7 +93,7 @@ class DB:
         index = ["Identificador: ","Motorista: ", "Preco: ", "Localidade: ", "Dias: "]
         for row in r:
             i = 0
-            Utils.Util.Separator()
+            Utils.Util.Separator(False)
             for x in row:
                 print(f"{index[i]}{x}")
                 i += 1
@@ -228,3 +228,27 @@ class DB:
 
         return t
 
+    @staticmethod
+    def GetWealth(idp):
+        global conn
+
+        sql = f"""
+            SELECT
+            M.MES,
+            SUM(M.PRECO) AS PRECO
+            FROM GASOSAFACUL.TBCONTRATO C 
+            JOIN GASOSAFACUL.TBMOTORISTA M ON M.ID = C.ID_MOTORISTA
+            WHERE M.ID_PESSOA = {idp}
+            GROUP BY 1
+        """
+
+        c = conn.cursor()
+        c.execute(sql)
+        r = c.fetchall()
+
+        t = []
+
+        for row in r:
+            t.append(row)
+
+        return t

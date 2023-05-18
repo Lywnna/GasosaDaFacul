@@ -1,10 +1,14 @@
+from base64 import b16decode
 import matplotlib.pyplot as plt
 import os
 
 class Util():
     @staticmethod
-    def Separator(char = "=-=", step = 20):
-        print("\n" + char * step + "\n")
+    def Separator(b, char = "=-=", step = 20):
+        s = "\n" + char * step + "\n"
+        if not b:
+            print(s)
+        return s
 
 
     @staticmethod
