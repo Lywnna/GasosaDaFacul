@@ -101,7 +101,7 @@ class Carona():
 
         Utils.Util.Graph(x, y,"Meses", "Gasto", "Gastos mensais")
 
-    def ExportReport():
+    def ExportReport(idp):
         
         t = Database.DB.GetSpent(idp)
 
