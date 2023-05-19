@@ -1,4 +1,3 @@
-from base64 import b16decode
 import matplotlib.pyplot as plt
 import os
 
