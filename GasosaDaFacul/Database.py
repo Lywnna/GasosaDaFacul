@@ -210,11 +210,11 @@ class DB:
         sql = f"""
             SELECT
             M.MES,
-            SUM(M.PRECO) AS PRECO
+            M.DIAS,
+            M.PRECO
             FROM gasosafacul.tbcontrato C
             JOIN gasosafacul.tbmotorista M ON M.ID = C.ID_MOTORISTA
-            WHERE C.ID_CARONA = {idp}
-            GROUP BY 1
+            WHERE C.ID_CARONA = {idp}            
         """
 
         c = conn.cursor()
@@ -235,11 +235,11 @@ class DB:
         sql = f"""
             SELECT
             M.MES,
-            SUM(M.PRECO) AS PRECO
+            M.DIAS,
+            M.PRECO
             FROM GASOSAFACUL.TBCONTRATO C 
             JOIN GASOSAFACUL.TBMOTORISTA M ON M.ID = C.ID_MOTORISTA
             WHERE M.ID_PESSOA = {idp}
-            GROUP BY 1
         """
 
         c = conn.cursor()
