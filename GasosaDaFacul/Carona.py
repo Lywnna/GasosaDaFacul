@@ -94,11 +94,12 @@ class Carona():
     def ExportGraph(idp):
         
         t = Database.DB.GetSpent(idp)
-        x = []
-        y = []
+        x, y, d = [], [], []
         for tup in t:
             x.append(tup[0]) 
-            y.append(tup[1]) 
+            d = tup[1].split(",")
+            y.append(tup[3] * len(d))               
+            
 
         Utils.Util.Graph(x, y,"Meses", "Gasto", "Gastos mensais")
 
