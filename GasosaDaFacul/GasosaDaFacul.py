@@ -12,7 +12,7 @@ def main():
         else:
             Registro()
 
-        Utils.Util.Clear()
+        Utils.Util.Clear(False)
 
 
 def PromptPrincipal():
@@ -46,9 +46,10 @@ def Login():
 
     if Database.DB.Login(user, pas) != 1:
         print("Login desconhecido ou errado")
+        Utils.Util.Clear(True)
         return -1
 
-    Utils.Util.Clear()
+    Utils.Util.Clear(False)
 
     if Database.DB.GetType(user) == 2:
         Motorista.Motorista.main(Database.DB.GetIDPlayer(user))
@@ -106,7 +107,7 @@ def Registro():
 
     print("Cadastrado com sucesso\n\n")
 
-    Utils.Util.Separator()
+    Utils.Util.Separator(True)
 
 
 

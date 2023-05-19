@@ -20,5 +20,8 @@ class Util():
         plt.show()
 
     @staticmethod
-    def Clear():
+    def Clear(b):
+        if b:
+            Util.Separator(False)
+            input("Precione Enter para prosseguir...")
         os.system("cls")

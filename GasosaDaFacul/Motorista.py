@@ -5,17 +5,17 @@ import Utils
 
 class Motorista():
     def main(idp):
-        Utils.Util.Clear()
         e = ""
         id_motorista = idp
         while not(e in ["1", "2", "3", "4"]):
             Utils.Util.Separator(False)
             print("Menu principal do motorista")
             print("1 - Criar oferta de carona")
-            print("2 - Ver clientes")
-            print("3 - Exportar relatorios")
-            print("4 - Exportar graficos")
-            print("5 - Sair")
+            print("2 - Deletar ofertas")
+            print("3 - Ver clientes")
+            print("4 - Exportar relatorios")
+            print("5 - Exportar graficos")
+            print("6 - Sair")
             e = input("Escolha: ")
 
             Utils.Util.Separator(False)
@@ -23,16 +23,18 @@ class Motorista():
             if e == "1":
                 Motorista.CreateOffer(id_motorista)  
             elif e == "2":
-                Motorista.CheckClients(id_motorista)
+                print()
             elif e == "3":
+                Motorista.CheckClients(id_motorista)
+            elif e == "4":
                 Motorista.CreateReport(id_motorista)
                 input("Relatorio exportado com sucesso\n")
-            elif e == "4":
+            elif e == "5":
                 Motorista.ExportGraph(id_motorista)
             else:
                 exit(0)
 
-            Utils.Util.Clear()
+            Utils.Util.Clear(True)
             e = ""
 
     def CreateOffer(idp):
@@ -45,7 +47,7 @@ class Motorista():
         
         print("Escolha os dias que pode dar carona separados por virgula")
         dias = input("Dias: ")
-        Database.DB.SaveOffer(id_motorista, preco, local, dias)
+        Database.DB.SaveOffer(id_motorista, preco, local, dias, now.month)
 
         print("Sucesso")
 
@@ -93,6 +95,8 @@ class Motorista():
         with open("relatorio.txt", "w") as f:
             f.write(s)
 
+    def DeleteOffer(idp):
+        Database.DB.DeleteOffer(idp)
 
 if __name__ == "__main__":
     Motorista.main()

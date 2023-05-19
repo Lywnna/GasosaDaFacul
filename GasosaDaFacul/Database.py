@@ -63,10 +63,10 @@ class DB:
         return t
 
     @staticmethod
-    def SaveOffer(id_player, preco, localidades, dias):
+    def SaveOffer(id_player, preco, localidades, dias, mes):
         global conn
 
-        sql = f" INSERT INTO GASOSAFACUL.TBMOTORISTA (ID_PESSOA, PRECO, LOCALIDADE, DIAS) VALUES ({id_player}, {preco}, '{localidades}', '{dias}')  "
+        sql = f" INSERT INTO GASOSAFACUL.TBMOTORISTA (ID_PESSOA, PRECO, LOCALIDADE, DIAS, MES) VALUES ({id_player}, {preco}, '{localidades}', '{dias}', '{mes}')  "
 
         c = conn.cursor()
         c.execute(sql)
@@ -98,7 +98,7 @@ class DB:
                 print(f"{index[i]}{x}")
                 i += 1
 
-        Utils.Util.Separator()
+        Utils.Util.Separator(False)
 
         sql = "SELECT M.ID FROM gasosafacul.tbmotorista M"
         
@@ -252,3 +252,36 @@ class DB:
             t.append(row)
 
         return t
+
+
+    @staticmethod
+    def DeleteOffer(idp):
+        global conn
+
+        sql = f"""
+            SELECT
+            M.ID,
+            M.PRECO,
+            M.LOCALIDADE,
+            M.MES,
+            M.DIAS
+            FROM gasosafacul.tbmotorista M
+            WHERE M.ID_PESSOA = {idp}
+        """
+
+        c = conn.cursor()
+        c.execute(sql)
+        r = c.fetchall()
+
+        index = ["Identificador: ", "Preco: ", "Localidade: ", "Mes: ", "Dias"] 
+        for row in r:
+            x = 0
+            for i in row:
+                print(f"{index[x]}{i}\n")
+                x += 1
+
+        ID = 0
+        sql = f"DELETE FROM GASOSAFACUL.TBMOTORISTA M WHERE M.ID = {ID}"
+        
+        c.execute(sql)
+        conn.commit()

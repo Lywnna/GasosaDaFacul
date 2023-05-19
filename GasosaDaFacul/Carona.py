@@ -30,7 +30,7 @@ class Carona():
             else:
                 exit(0)
             
-            Utils.Util.Clear()
+            Utils.Util.Clear(True)
             e = ""
 
     def ChooseOffers(id_player):
