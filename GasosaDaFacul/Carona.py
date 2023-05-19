@@ -97,7 +97,7 @@ class Carona():
         x, y, d = [], [], []
         for tup in t:
             x.append(tup[0]) 
-            d = tup[1].split(",")
+            d = int(tup[1].split(",").strip())
             y.append(tup[3] * len(d))               
             
 
