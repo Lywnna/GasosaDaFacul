@@ -1,6 +1,4 @@
 import calendar as cal
-from datetime import datetime
-from email import utils
 import Database
 import Utils
 
@@ -27,7 +25,7 @@ class Motorista():
                 Motorista.CheckClients(id_motorista)
             elif e == "3":
                 Motorista.CreateReport(id_motorista)
-                input("Relatorio exportado com sucesso")
+                input("Relatorio exportado com sucesso\n")
             elif e == "4":
                 Motorista.ExportGraph(id_motorista)
             else:
