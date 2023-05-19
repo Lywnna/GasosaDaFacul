@@ -98,7 +98,7 @@ class Carona():
         for tup in t:
             x.append(tup[0]) 
             d = tup[1].split(",")
-            y.append(float(tup[3]) * len(d))
+            y.append(float(tup[2]) * len(d))
             
 
         Utils.Util.Graph(x, y,"Meses", "Gasto", "Gastos mensais")
@@ -108,7 +108,7 @@ class Carona():
         t = Database.DB.GetSpent(idp)
 
         s = ""
-        index = ["Mes: ", "Ganhos: "]
+        index = ["Mes: ","Dias: " ,"Ganhos: "]
         for tup in t:
             x = 0
             s +=  Utils.Util.Separator(True)

@@ -1,5 +1,6 @@
 import calendar as cal
 import Database
+from datetime import datetime
 import Utils
 
 class Motorista():
@@ -72,7 +73,7 @@ class Motorista():
         for tup in t:
             x.append(tup[0]) 
             d = tup[1].split(",")
-            y.append(float(tup[3]) * len(d))
+            y.append(float(tup[2]) * len(d))
 
         Utils.Util.Graph(x, y, "Meses", "Ganhos", "Ganhos mensais")
 
@@ -81,7 +82,7 @@ class Motorista():
         t = Database.DB.GetWealth(idp)
         
         s = ""
-        index = ["Mes: ", "Ganhos:"]
+        index = ["Mes: ", "Dias: ", "Ganhos:"]
         for tup in t:
             x = 0
             s += Utils.Util.Separator(True)
