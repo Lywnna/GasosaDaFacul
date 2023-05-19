@@ -67,12 +67,12 @@ class Motorista():
     def ExportGraph(idp):
 
         t = Database.DB.GetWealth(idp)
-
-        x = []
-        y = []
+        
+        x, y, d = [], [], []
         for tup in t:
-            x.append(tup[0])
-            y.append(tup[1])
+            x.append(tup[0]) 
+            d = tup[1].split(",")
+            y.append(tup[3] * len(d))
 
         Utils.Util.Graph(x, y, "Meses", "Ganhos", "Ganhos mensais")
 
