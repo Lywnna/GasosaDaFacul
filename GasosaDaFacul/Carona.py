@@ -23,7 +23,8 @@ class Carona():
             elif e == "2":
                 Carona.CheckOffer(id_player)
             elif e == "3":
-                print()
+                Carona.ExportReport(id_player)
+                input("Relatorio foi exportado com sucesso\n")
             elif e == "4":
                 Carona.ExportGraph(id_player)
             else:
@@ -114,7 +115,7 @@ class Carona():
                 s += f"{index[x]}{i}\n"
                 x += 1
 
-        with open("relatorio.txt", "w") as f:
+        with open("relatorioCarona.txt", "w") as f:
             f.write(s)
 
 
