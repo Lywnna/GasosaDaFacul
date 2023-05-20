@@ -23,7 +23,7 @@ class Motorista():
             if e == "1":
                 Motorista.CreateOffer(id_motorista)  
             elif e == "2":
-                print()
+                Motorista.DeleteOffer(id_motorista)
             elif e == "3":
                 Motorista.CheckClients(id_motorista)
             elif e == "4":

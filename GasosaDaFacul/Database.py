@@ -257,7 +257,6 @@ class DB:
     @staticmethod
     def DeleteOffer(idp):
         global conn
-
         sql = f"""
             SELECT
             M.ID,
@@ -273,15 +272,28 @@ class DB:
         c.execute(sql)
         r = c.fetchall()
 
-        index = ["Identificador: ", "Preco: ", "Localidade: ", "Mes: ", "Dias"] 
+        index = ["Identificador: ", "Preco: ", "Localidade: ", "Mes: ", "Dias: "] 
+        ids = []
         for row in r:
             x = 0
             for i in row:
+                if x == 0:
+                    ids.append(str(i).strip())
                 print(f"{index[x]}{i}\n")
                 x += 1
+        ID = ""
+        b = True
+        while not(ID in ids):
+            Utils.Util.Separator(False)
+            ID = input("Escreva um identificador para deletar, ou 0 para sair: ")
+            if ID.strip() == "0":
+                b = False
+                break
 
-        ID = 0
-        sql = f"DELETE FROM GASOSAFACUL.TBMOTORISTA M WHERE M.ID = {ID}"
         
-        c.execute(sql)
-        conn.commit()
+        if b:
+            sql = f"DELETE FROM GASOSAFACUL.TBMOTORISTA WHERE (ID = {ID})"
+
+            c.execute(sql)
+            conn.commit()
+            print("Deletado com sucesso")
