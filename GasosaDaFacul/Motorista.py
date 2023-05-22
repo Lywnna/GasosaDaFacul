@@ -31,8 +31,10 @@ class Motorista():
                 input("Relatorio exportado com sucesso\n")
             elif e == "5":
                 Motorista.ExportGraph(id_motorista)
-            else:
+            elif e == "6":
                 exit(0)
+            else:
+                print("Escolha errada, tente novamente")
 
             Utils.Util.Clear(True)
             e = ""

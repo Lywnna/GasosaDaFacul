@@ -27,8 +27,10 @@ class Carona():
                 input("Relatorio foi exportado com sucesso\n")
             elif e == "4":
                 Carona.ExportGraph(id_player)
-            else:
+            elif e == "5":
                 exit(0)
+            else:
+                print("Escolha errada, tente novamente")
             
             Utils.Util.Clear(True)
             e = ""

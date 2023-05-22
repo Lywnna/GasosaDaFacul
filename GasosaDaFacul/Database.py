@@ -87,7 +87,7 @@ class DB:
             FROM gasosafacul.tbmotorista M
             JOIN gasosafacul.tblogin L ON L.ID = M.ID_PESSOA
         """
-        c = conn.cursor()
+        c = conn.cursor()#@!%$%!@#"
         c.execute(sql)
         r = c.fetchall()
 
