@@ -36,6 +36,7 @@ class DB:
 
     @staticmethod
     def GetType(user):
+
         global conn
 
         sql = f" SELECT L.TIPO FROM GASOSAFACUL.TBLOGIN L WHERE L.USUARIO = '{user}' "
@@ -297,3 +298,20 @@ class DB:
             c.execute(sql)
             conn.commit()
             print("Deletado com sucesso")
+
+    @staticmethod
+    def CheckUserExist(user):
+        global conn
+
+        sql = f"""
+            SELECT
+            COUNT(L.USUARIO) AS COUNT
+            FROM gasosafacul.tblogin L
+            WHERE L.USUARIO = '{user}'
+        """
+
+        c = conn.cursor()
+        c.execute(sql)
+        r = c.fetchall()
+
+        return r[0]

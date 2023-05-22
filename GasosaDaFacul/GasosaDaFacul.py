@@ -87,6 +87,14 @@ def Registro():
         if pasConf == keyword:
             print(s)
             return 
+
+        a = Database.DB.CheckUserExist(user)
+        
+        if a[0] > 0:
+            print("Usuario com mesmo nome, digite outro")
+            pas = "#@!%$%!@#"
+            t = -1
+
         t += 1
 
    
