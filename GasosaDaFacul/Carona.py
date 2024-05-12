@@ -6,6 +6,7 @@ class Carona():
     def main(idp):
         id_player = idp
         e = ""
+
         while not(e in ["1", "2", "3", "4"]):
             Utils.Util.Separator(False)
             print("Menu principal do carona")
